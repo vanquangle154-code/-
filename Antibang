@@ -1,0 +1,45 @@
+-- Instant kill banger lol
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+-- Store the original position to teleport back
+local originalPosition = hrp.Position
+
+-- Teleport to the target position
+local targetPosition = Vector3.new(103.00012969970703, -496.3302307128906, -24.618791580200195)
+hrp.CFrame = CFrame.new(targetPosition)
+
+-- Create a platform under the player (2 studs below) and make it black
+local platform = Instance.new("Part")
+platform.Size = Vector3.new(10, 1, 10)  -- Size of the platform
+platform.Anchored = true
+platform.CanCollide = true
+platform.Material = Enum.Material.SmoothPlastic
+platform.Color = Color3.fromRGB(0, 0, 0)  -- Black color for the platform
+platform.Position = targetPosition - Vector3.new(0, 2, 0)  -- Initial position 2 studs below the player
+platform.Parent = workspace
+
+-- Send the chat message "ez"
+game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("ez", "all")
+
+-- Teleport the player back to their original position after 5 seconds
+wait(5)
+hrp.CFrame = CFrame.new(originalPosition)
+
+-- Create a new ScreenGui for the label
+local playerGui = player:WaitForChild("PlayerGui")
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+-- Create the label with a cool font
+local label = Instance.new("TextLabel")
+label.Parent = screenGui
+label.Text = "Made by Hecker"
+label.Size = UDim2.new(0, 300, 0, 50)  -- Label size
+label.Position = UDim2.new(0.5, -150, 1, -60)  -- Position below the mobile screen
+label.Font = Enum.Font.Bangers  -- You can change this to other fonts like 'GothamBold', 'SciFi', etc.
+label.TextSize = 30
+label.BackgroundTransparency = 1  -- Transparent background
+label.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+label.TextStrokeTransparency = 0.5  -- Slight stroke for visibility
